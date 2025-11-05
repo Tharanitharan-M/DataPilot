@@ -1,133 +1,244 @@
-🏷️ Project Name: DataPilot — The AI-powered Data Copilot for Teams
+# DataPilot
 
-🌍 One-line summary:
+A modern full-stack application built with Next.js and FastAPI.
 
-DataPilot is an AI-powered analytics platform that lets any company connect their data sources (databases, files, documents) and instantly ask natural-language questions — like “Show me monthly revenue trends” or “Summarize our customer feedback reports.”
+## 🚀 Tech Stack
 
-⸻
+### Frontend
+- **Next.js 16+** with App Router
+- **TypeScript** for type safety
+- **Tailwind CSS 4** for styling
+- **shadcn/ui** for UI components
+- **React 19** for building interactive UIs
 
-💡 The Problem
+### Backend
+- **FastAPI** for high-performance API
+- **PostgreSQL** for database
+- **Redis** for caching
+- **SQLAlchemy** for ORM
+- **Pydantic** for data validation
+- **JWT** for authentication
 
-In every modern company, data is scattered across databases, spreadsheets, and documents.
-Non-technical teams (like marketing, finance, and operations) often can’t access insights without help from data engineers or analysts.
+### Infrastructure
+- **Docker Compose** for local development
+- **Docker** for containerization
 
-They constantly ask questions like:
-	•	“Can you pull revenue by product for last quarter?”
-	•	“What are customers complaining about in support tickets?”
-	•	“Can I get a quick summary of our refund policy docs?”
+## 📁 Project Structure
 
-These tasks take hours or days — and require SQL, BI tools, or manual work.
+```
+DataPilot/
+├── frontend/                 # Next.js frontend application
+│   ├── src/
+│   │   ├── app/             # App router pages
+│   │   ├── components/      # React components
+│   │   └── lib/             # Utility functions
+│   ├── public/              # Static assets
+│   └── package.json
+│
+├── backend/                  # FastAPI backend application
+│   ├── app/
+│   │   ├── api/             # API routes and dependencies
+│   │   ├── core/            # Core configuration
+│   │   ├── db/              # Database setup
+│   │   ├── models/          # SQLAlchemy models
+│   │   ├── schemas/         # Pydantic schemas
+│   │   ├── services/        # Business logic
+│   │   └── utils/           # Utility functions
+│   ├── main.py              # Application entry point
+│   └── requirements.txt     # Python dependencies
+│
+├── infrastructure/           # Infrastructure as Code
+│   └── init-scripts/        # Database initialization scripts
+│
+├── shared/                   # Shared code/types between frontend & backend
+│
+└── docker-compose.yml        # Local development environment
+```
 
-⸻
+## 🛠️ Getting Started
 
-🧩 The Solution: DataPilot
+### Prerequisites
 
-DataPilot makes data as easy to talk to as ChatGPT — but secure and governed.
+- **Node.js** 20+ and npm 10+
+- **Python** 3.13+
+- **Docker** and Docker Compose
+- **Git**
 
-It’s a multi-tenant SaaS platform where each company can:
-	1.	Sign up and create a secure workspace.
-	2.	Connect their internal data sources — databases (Postgres, MySQL), CSVs, or uploaded PDFs.
-	3.	Chat with their data in plain English — e.g.,
-“What was our average order value by region in Q3?”
-“Summarize feedback from customers mentioning ‘refunds’.”
-	4.	Visualize the results instantly as charts or tables.
-	5.	Manage access so sensitive data is protected, and usage can be billed per tenant.
+### Installation
 
-⸻
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd DataPilot
+   ```
 
-⚙️ How it works (architecture overview)
+2. **Install root dependencies**
+   ```bash
+   npm install
+   ```
 
-Layer	Technology	What it does
-Frontend (Web App)	Next.js + React + Tailwind CSS	Clean dashboard, chat interface, data visualizations, billing pages
-Backend (API Layer)	FastAPI (Python)	Handles queries, connects to data sources, enforces roles & governance
-Database	PostgreSQL + pgvector	Stores users, tenants, query logs, embeddings
-LLM Layer (AI)	AWS Bedrock (Claude / Mistral models)	Converts natural language → SQL queries and summaries
-Storage	AWS S3	Stores uploaded documents (PDFs, CSVs)
-Auth	AWS Cognito	Sign up / login / role-based access per tenant
-Secrets Management	AWS Secrets Manager	Securely stores per-tenant DB credentials
-Payments	Stripe	Subscription billing and usage-based pricing
-Monitoring	Sentry + OpenTelemetry	Error tracking and performance metrics
-Deployment	AWS ECS Fargate + CloudFront	Scalable, containerized production setup
+3. **Set up environment variables**
+   
+   Backend:
+   ```bash
+   cp backend/.env.example backend/.env
+   # Edit backend/.env with your configuration
+   ```
+   
+   Frontend:
+   ```bash
+   cp frontend/.env.example frontend/.env
+   # Edit frontend/.env with your configuration
+   ```
 
+4. **Install project dependencies**
+   ```bash
+   npm run setup
+   ```
 
-⸻
+### Development with Docker (Recommended)
 
-🧠 Intelligence Layer
+1. **Start all services**
+   ```bash
+   npm run docker:up
+   ```
 
-DataPilot uses LLMs (via AWS Bedrock) to:
-	•	Understand English queries.
-	•	Automatically generate safe SQL for the connected database.
-	•	Retrieve relevant document snippets (via embeddings).
-	•	Combine structured + unstructured insights into one answer.
+2. **Access the applications**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+   - API Documentation: http://localhost:8000/api/docs
+   - PostgreSQL: localhost:5432
+   - Redis: localhost:6379
 
-Example:
+3. **View logs**
+   ```bash
+   npm run docker:logs
+   ```
 
-You ask: “Compare sales data to our refund policy.”
+4. **Stop all services**
+   ```bash
+   npm run docker:down
+   ```
 
-DataPilot: pulls sales data from your DB, retrieves refund clauses from uploaded PDFs, and produces a combined chart + text summary.
+### Development without Docker
 
-⸻
+1. **Start the backend**
+   ```bash
+   cd backend
+   source venv/bin/activate
+   uvicorn main:app --reload
+   ```
 
-🧱 Key Features
-	1.	🔐 Multi-tenancy — each company (tenant) has its own isolated workspace and data.
-	2.	⚙️ Plug-and-play connectors — add your Postgres, MySQL, or upload CSV/PDFs.
-	3.	🧠 Natural language querying — no SQL or coding needed.
-	4.	📊 Instant visualizations — automatic charts and dashboards.
-	5.	🧩 Document understanding — ask questions across structured + unstructured data.
-	6.	💳 Billing system — Free + Pro + Enterprise tiers with Stripe integration.
-	7.	🛡️ Data governance — role-based permissions, query validation, audit logs.
-	8.	🔍 Observability — track query latency, token usage, and errors.
-	9.	☁️ Production-grade AWS setup — ECS, RDS, S3, Secrets Manager, Cognito, Terraform IaC.
+2. **Start the frontend (in a new terminal)**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
 
-⸻
+3. **Access the applications**
+   - Frontend: http://localhost:3000
+   - Backend API: http://localhost:8000
+   - API Documentation: http://localhost:8000/api/docs
 
-🎯 Who it’s for
-	•	Small to mid-size companies who want AI analytics without building infrastructure.
-	•	Non-technical teams who need quick answers from data.
-	•	Startups who want an internal data assistant for their operations, sales, or finance data.
+## 📝 Available Scripts
 
-⸻
+### Root Level
+- `npm run dev` - Start both frontend and backend in development mode
+- `npm run docker:up` - Start all services with Docker Compose
+- `npm run docker:down` - Stop all Docker services
+- `npm run docker:build` - Rebuild Docker images
+- `npm run lint` - Run linters for both frontend and backend
+- `npm run format` - Format code for both frontend and backend
+- `npm run test` - Run tests for both frontend and backend
 
-💬 Simple Example
+### Frontend
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
+- `npm run type-check` - Run TypeScript type checking
 
-User:
+### Backend
+- `uvicorn main:app --reload` - Start development server
+- `pytest` - Run tests
+- `black .` - Format code with Black
+- `flake8 .` - Run linter
+- `mypy .` - Run type checker
 
-“Show total revenue per product in the last 6 months and make a chart.”
+## 🗄️ Database
 
-DataPilot:
-	1.	Converts question → SQL:
+### Migrations with Alembic
 
-SELECT product, SUM(amount) as revenue
-FROM orders
-WHERE order_date > CURRENT_DATE - INTERVAL '6 months'
-GROUP BY product;
+```bash
+cd backend
 
+# Create a new migration
+alembic revision --autogenerate -m "Description"
 
-	2.	Executes query securely within your connected DB.
-	3.	Returns both a data table and auto-generated chart.
-	4.	Optionally adds a summary:
-“Product A generated 40% more revenue than Product B this period.”
+# Apply migrations
+alembic upgrade head
 
-⸻
+# Rollback migration
+alembic downgrade -1
+```
 
-🔒 Why This Matters
+## 🔒 Environment Variables
 
-DataPilot solves a real-world problem that every growing business has:
-too much data, not enough accessibility.
+### Backend (.env)
+- `DATABASE_URL` - PostgreSQL connection string
+- `REDIS_URL` - Redis connection string
+- `SECRET_KEY` - JWT secret key
+- `CORS_ORIGINS` - Allowed CORS origins
 
-It’s practical (not just an AI demo), technically deep (multi-tenant SaaS, Bedrock integration, governance, billing), and scalable (cloud-native with Terraform + CI/CD).
+### Frontend (.env)
+- `NEXT_PUBLIC_API_URL` - Backend API URL
+- `NEXTAUTH_SECRET` - NextAuth.js secret
 
-For your portfolio or résumé, it demonstrates:
-✅ Full-stack engineering
-✅ Cloud DevOps
-✅ Secure SaaS design
-✅ Generative AI integration
-✅ Payment + Auth + Observability (enterprise-level maturity)
+## 🧪 Testing
 
-⸻
+### Frontend
+```bash
+cd frontend
+npm test
+```
 
-🧭 In Short
+### Backend
+```bash
+cd backend
+source venv/bin/activate
+pytest
+```
 
-DataPilot is your AI copilot for data — a production-grade SaaS that combines analytics, AI, and governance into one platform.
+## 📦 Building for Production
 
-Built with: Next.js, FastAPI, AWS (ECS, RDS, Bedrock, S3), Stripe, and PostgreSQL.
+### Frontend
+```bash
+cd frontend
+npm run build
+npm start
+```
+
+### Backend
+```bash
+cd backend
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+## 🤝 Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Run linters and tests
+4. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🔗 Links
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [FastAPI Documentation](https://fastapi.tiangolo.com/)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [shadcn/ui Documentation](https://ui.shadcn.com/)
