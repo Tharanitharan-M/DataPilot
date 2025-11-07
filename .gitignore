@@ -148,3 +148,5 @@ infrastructure/.terraform.lock.hcl
 *.key
 *.cert
 secrets/
+
+*.md
