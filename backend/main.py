@@ -66,6 +66,14 @@ async def root():
     }
 
 
+# Favicon endpoint (prevent 500 errors)
+@app.get("/favicon.ico")
+async def favicon():
+    """Return 204 No Content for favicon requests"""
+    from fastapi.responses import Response
+    return Response(status_code=204)
+
+
 # Include API routes
 app.include_router(api_router, prefix="/api/v1")
 
