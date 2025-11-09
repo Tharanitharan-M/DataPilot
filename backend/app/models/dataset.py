@@ -39,8 +39,8 @@ class Dataset(BaseModel):
     # Status
     is_active = Column(Boolean, default=True, nullable=False)
     
-    # Metadata
-    metadata = Column(Text, nullable=True)  # JSON stored as text
+    # Metadata (renamed from 'metadata' to avoid SQLAlchemy conflict)
+    extra_metadata = Column(Text, nullable=True)  # JSON stored as text
     
     # Relationships
     organization = relationship("Organization", back_populates="datasets")

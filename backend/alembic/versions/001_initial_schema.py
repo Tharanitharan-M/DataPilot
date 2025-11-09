@@ -69,7 +69,7 @@ def upgrade() -> None:
         sa.Column('column_count', sa.Integer(), nullable=False, default=0),
         sa.Column('file_size', sa.Integer(), nullable=False, default=0),
         sa.Column('is_active', sa.Boolean(), nullable=False, default=True),
-        sa.Column('metadata', sa.Text(), nullable=True),
+        sa.Column('extra_metadata', sa.Text(), nullable=True),
         sa.Column('created_at', sa.DateTime(), nullable=False),
         sa.Column('updated_at', sa.DateTime(), nullable=False),
     )
