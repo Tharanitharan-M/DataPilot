@@ -1,6 +1,5 @@
-"""Business logic and service layer"""
+"""Application services"""
 
-# Service classes for business logic
-# from app.services.user_service import UserService
-# from app.services.item_service import ItemService
+from app.services.clerk_sync import ClerkSyncService
 
+__all__ = ["ClerkSyncService"]

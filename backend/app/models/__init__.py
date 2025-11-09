@@ -1,8 +1,14 @@
 """Database models"""
 
-from app.db.session import Base
+from app.models.base import BaseModel, TimestampMixin
+from app.models.organization import Organization
+from app.models.user import User
+from app.models.dataset import Dataset
 
-# Import all models here so they're registered with SQLAlchemy
-# from app.models.user import User
-# from app.models.item import Item
-
+__all__ = [
+    "BaseModel",
+    "TimestampMixin",
+    "Organization",
+    "User",
+    "Dataset",
+]

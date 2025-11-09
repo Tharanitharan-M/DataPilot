@@ -1,7 +1,19 @@
-"""API dependencies for dependency injection"""
+"""API dependencies"""
 
-from app.db.session import get_db
-from app.db.redis_client import get_redis
+from app.api.dependencies.auth import (
+    get_current_user,
+    get_current_active_user,
+    get_current_user_optional,
+    require_organization,
+    require_admin,
+    AuthenticatedUser,
+)
 
-__all__ = ["get_db", "get_redis"]
-
+__all__ = [
+    "get_current_user",
+    "get_current_active_user",
+    "get_current_user_optional",
+    "require_organization",
+    "require_admin",
+    "AuthenticatedUser",
+]

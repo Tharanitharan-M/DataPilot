@@ -17,18 +17,22 @@ class Settings(BaseSettings):
     HOST: str = "0.0.0.0"
     PORT: int = 8000
     
-    # Database
+    # Database (Neon PostgreSQL or local)
     DATABASE_URL: str = "postgresql://datapilot_user:datapilot_password@localhost:5432/datapilot_db"
-    DB_HOST: str = "localhost"
-    DB_PORT: int = 5432
-    DB_USER: str = "datapilot_user"
-    DB_PASSWORD: str = "datapilot_password"
-    DB_NAME: str = "datapilot_db"
+    DB_POOL_SIZE: int = 10
+    DB_MAX_OVERFLOW: int = 20
     
-    # Redis
+    # Redis (optional - for caching/sessions)
     REDIS_URL: str = "redis://localhost:6379/0"
     REDIS_HOST: str = "localhost"
     REDIS_PORT: int = 6379
+    REDIS_ENABLED: bool = False
+    
+    # Clerk Authentication
+    CLERK_SECRET_KEY: str = ""  # Get from Clerk Dashboard
+    CLERK_PUBLISHABLE_KEY: str = ""  # Get from Clerk Dashboard
+    CLERK_DOMAIN: str = ""  # e.g., your-app.clerk.accounts.dev
+    CLERK_WEBHOOK_SECRET: str = ""  # For webhook signature verification
     
     # Security
     SECRET_KEY: str = "your-secret-key-change-this-in-production"

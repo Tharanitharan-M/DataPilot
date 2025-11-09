@@ -1,6 +1,12 @@
 """Pydantic schemas for request/response validation"""
 
-# Import schemas here
-# from app.schemas.user import User, UserCreate, UserUpdate
-# from app.schemas.item import Item, ItemCreate, ItemUpdate
+from app.schemas.user import UserResponse, UserUpdate
+from app.schemas.dataset import DatasetResponse, DatasetCreate, DatasetUpdate
 
+__all__ = [
+    "UserResponse",
+    "UserUpdate",
+    "DatasetResponse",
+    "DatasetCreate",
+    "DatasetUpdate",
+]
