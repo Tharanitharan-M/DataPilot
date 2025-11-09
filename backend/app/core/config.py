@@ -28,7 +28,7 @@ class Settings(BaseSettings):
     REDIS_PORT: int = 6379
     REDIS_ENABLED: bool = False
     
-    # Clerk Authentication
+    # Clerk Authentication (Optional - will disable auth features if not set)
     CLERK_SECRET_KEY: str = ""  # Get from Clerk Dashboard
     CLERK_PUBLISHABLE_KEY: str = ""  # Get from Clerk Dashboard
     CLERK_DOMAIN: str = ""  # e.g., your-app.clerk.accounts.dev
