@@ -1,19 +1,76 @@
+# Python
 __pycache__
 *.pyc
 *.pyo
 *.pyd
 .Python
-venv
-.venv
-env
-ENV
+*.so
+*.egg
+*.egg-info
+dist
+build
 .pytest_cache
 .mypy_cache
 .coverage
 htmlcov
-.tox
+
+# Virtual environments
+venv
+env
+ENV
+.venv
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Development files
 .env
 .env.local
+.env.development
 *.log
-.DS_Store
 
+# Testing
+tests
+pytest.ini
+
+# Alembic (database migrations - not needed on Vercel)
+alembic
+alembic.ini
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Development tools
+makefile
+Makefile
+
+# Documentation
+*.md
+README*
+CONTRIBUTING*
+
+# AWS AppRunner config
+apprunner.yaml
+
+# Type checking
+mypy.ini
+.mypy_cache
+
+# Linting
+.flake8
+.pylintrc
+
+# Git
+.git
+.gitignore
+.gitattributes
