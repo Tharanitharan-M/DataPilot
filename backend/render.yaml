@@ -1,3 +1,16 @@
+# Render Blueprint for DataPilot Backend
+# 
+# To deploy: 
+# 1. Push to GitHub
+# 2. In Render Dashboard: New + → Blueprint
+# 3. Connect repository
+# 4. Set environment variables (DATABASE_URL, CORS_ORIGINS)
+# 5. Click Apply
+#
+# Manual setup? Use these exact commands:
+# Build: pip install -r requirements.txt
+# Start: uvicorn main:app --host 0.0.0.0 --port $PORT
+
 services:
   - type: web
     name: datapilot-api
