@@ -43,6 +43,21 @@ class Settings(BaseSettings):
     CORS_ORIGINS: str = "http://localhost:3000,http://localhost:3001"
     ALLOWED_HOSTS: str = "localhost,127.0.0.1"
     
+    # AWS Configuration
+    AWS_REGION: str = "us-east-1"
+    AWS_ACCESS_KEY_ID: str = ""
+    AWS_SECRET_ACCESS_KEY: str = ""
+    
+    # AWS Bedrock LLM Configuration
+    BEDROCK_MODEL_ID: str = "anthropic.claude-3-sonnet-20240229-v1:0"  # Claude 3 Sonnet
+    BEDROCK_MAX_TOKENS: int = 4096
+    BEDROCK_TEMPERATURE: float = 0.1  # Low temperature for more consistent SQL generation
+    BEDROCK_ENABLED: bool = False  # Enable when AWS credentials are configured
+    
+    # Bedrock Guardrails (Optional - for additional safety)
+    BEDROCK_GUARDRAIL_ID: str = ""  # Created in AWS Console
+    BEDROCK_GUARDRAIL_VERSION: str = ""
+    
     @property
     def cors_origins_list(self) -> List[str]:
         """Parse CORS origins into a list"""

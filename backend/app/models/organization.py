@@ -36,6 +36,9 @@ class Organization(BaseModel):
     # Relationships
     users = relationship("User", back_populates="organization", cascade="all, delete-orphan")
     datasets = relationship("Dataset", back_populates="organization", cascade="all, delete-orphan")
+    data_connections = relationship("DataConnection", back_populates="organization", cascade="all, delete-orphan")
+    queries = relationship("Query", back_populates="organization", cascade="all, delete-orphan")
+    documents = relationship("Document", back_populates="organization", cascade="all, delete-orphan")
     
     def __repr__(self):
         return f"<Organization(id={self.id}, name={self.name}, slug={self.slug})>"

@@ -45,6 +45,9 @@ class User(BaseModel):
     
     # Relationships
     organization = relationship("Organization", back_populates="users")
+    data_connections = relationship("DataConnection", back_populates="user", cascade="all, delete-orphan")
+    queries = relationship("Query", back_populates="user", cascade="all, delete-orphan")
+    documents = relationship("Document", back_populates="user", cascade="all, delete-orphan")
     
     def __repr__(self):
         return f"<User(id={self.id}, email={self.email}, org={self.organization_id})>"
