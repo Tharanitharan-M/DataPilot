@@ -45,9 +45,5 @@ python-dateutil==2.9.0.post0
 boto3==1.35.36
 botocore==1.35.36
 
-# Document processing (for CSV, Excel, JSON uploads)
-pandas==2.2.2
-openpyxl==3.1.2
-
 # ASGI server
 h11==0.16.0
