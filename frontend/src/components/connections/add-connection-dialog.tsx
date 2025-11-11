@@ -128,7 +128,7 @@ export function AddConnectionDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-[640px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Add Database Connection</DialogTitle>
           <DialogDescription>
@@ -137,41 +137,49 @@ export function AddConnectionDialog({
         </DialogHeader>
 
         <form onSubmit={handleSubmit}>
-          <div className="space-y-4 py-4">
+          <div className="space-y-5 px-6 pb-4">
             {/* Connection Name */}
             <div className="space-y-2">
-              <Label htmlFor="name">Connection Name *</Label>
+              <Label htmlFor="name" className="text-sm font-medium">
+                Connection Name <span className="text-destructive">*</span>
+              </Label>
               <Input
                 id="name"
                 placeholder="My Production Database"
                 value={formData.name}
                 onChange={(e) => handleChange("name", e.target.value)}
+                className="h-10"
                 required
               />
             </div>
 
-            {/* Host */}
+            {/* Host and Port */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="host">Host *</Label>
+                <Label htmlFor="host" className="text-sm font-medium">
+                  Host <span className="text-destructive">*</span>
+                </Label>
                 <Input
                   id="host"
                   placeholder="localhost or db.example.com"
                   value={formData.host}
                   onChange={(e) => handleChange("host", e.target.value)}
+                  className="h-10"
                   required
                 />
               </div>
 
-              {/* Port */}
               <div className="space-y-2">
-                <Label htmlFor="port">Port *</Label>
+                <Label htmlFor="port" className="text-sm font-medium">
+                  Port <span className="text-destructive">*</span>
+                </Label>
                 <Input
                   id="port"
                   type="number"
                   placeholder="5432"
                   value={formData.port}
                   onChange={(e) => handleChange("port", parseInt(e.target.value))}
+                  className="h-10"
                   required
                 />
               </div>
@@ -179,12 +187,15 @@ export function AddConnectionDialog({
 
             {/* Database */}
             <div className="space-y-2">
-              <Label htmlFor="database">Database Name *</Label>
+              <Label htmlFor="database" className="text-sm font-medium">
+                Database Name <span className="text-destructive">*</span>
+              </Label>
               <Input
                 id="database"
                 placeholder="myapp_production"
                 value={formData.database}
                 onChange={(e) => handleChange("database", e.target.value)}
+                className="h-10"
                 required
               />
             </div>
@@ -192,41 +203,50 @@ export function AddConnectionDialog({
             {/* Username & Password */}
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="username">Username *</Label>
+                <Label htmlFor="username" className="text-sm font-medium">
+                  Username <span className="text-destructive">*</span>
+                </Label>
                 <Input
                   id="username"
                   placeholder="dbuser"
                   value={formData.username}
                   onChange={(e) => handleChange("username", e.target.value)}
+                  className="h-10"
                   required
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password">Password *</Label>
+                <Label htmlFor="password" className="text-sm font-medium">
+                  Password <span className="text-destructive">*</span>
+                </Label>
                 <Input
                   id="password"
                   type="password"
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) => handleChange("password", e.target.value)}
+                  className="h-10"
                   required
                 />
               </div>
             </div>
 
             {/* SSL Toggle */}
-            <div className="flex items-center justify-between py-2">
-              <div className="space-y-0.5">
-                <Label htmlFor="ssl">Enable SSL</Label>
-                <div className="text-sm text-muted-foreground">
+            <div className="flex items-start justify-between rounded-lg border border-border/50 bg-muted/30 p-4">
+              <div className="space-y-1 flex-1 pr-4">
+                <Label htmlFor="ssl" className="text-sm font-medium cursor-pointer">
+                  Enable SSL
+                </Label>
+                <p className="text-sm text-muted-foreground">
                   Use SSL/TLS for secure connection
-                </div>
+                </p>
               </div>
               <Switch
                 id="ssl"
                 checked={formData.ssl_enabled}
                 onCheckedChange={(checked) => handleChange("ssl_enabled", checked)}
+                className="mt-0.5"
               />
             </div>
 
@@ -234,14 +254,26 @@ export function AddConnectionDialog({
             {testStatus && (
               <Alert
                 variant={testStatus.success ? "default" : "destructive"}
-                className={testStatus.success ? "border-green-600 bg-green-50" : ""}
+                className={
+                  testStatus.success
+                    ? "border-green-500/50 bg-green-500/10 text-green-700 dark:text-green-400"
+                    : ""
+                }
               >
                 {testStatus.success ? (
-                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" />
                 ) : (
                   <XCircle className="h-4 w-4" />
                 )}
-                <AlertDescription>{testStatus.message}</AlertDescription>
+                <AlertDescription
+                  className={
+                    testStatus.success
+                      ? "text-green-700 dark:text-green-400"
+                      : ""
+                  }
+                >
+                  {testStatus.message}
+                </AlertDescription>
               </Alert>
             )}
 
@@ -254,12 +286,13 @@ export function AddConnectionDialog({
             )}
           </div>
 
-          <DialogFooter className="gap-2">
+          <DialogFooter className="border-t border-border/50 pt-5 mt-2">
             <Button
               type="button"
               variant="outline"
               onClick={handleTest}
               disabled={loading}
+              className="min-w-[140px]"
             >
               {loading ? (
                 <>
@@ -273,6 +306,7 @@ export function AddConnectionDialog({
             <Button
               type="submit"
               disabled={loading || !testStatus?.success}
+              className="min-w-[160px]"
             >
               {loading ? (
                 <>
